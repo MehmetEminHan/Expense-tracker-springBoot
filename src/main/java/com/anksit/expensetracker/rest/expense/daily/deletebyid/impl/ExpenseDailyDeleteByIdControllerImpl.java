@@ -4,9 +4,11 @@ import com.anksit.expensetracker.rest.expense.daily.deletebyid.ExpenseDailyDelet
 import com.anksit.expensetracker.service.expense.daily.ExpenseDailyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+
 public class ExpenseDailyDeleteByIdControllerImpl implements ExpenseDailyDeleteByIdController {
 
     private final ExpenseDailyService expenseDailyService;
