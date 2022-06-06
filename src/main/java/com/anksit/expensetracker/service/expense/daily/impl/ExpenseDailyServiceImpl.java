@@ -4,9 +4,12 @@ import com.anksit.expensetracker.model.ExpenseDailyDTO;
 import com.anksit.expensetracker.repository.expenses.daily.ExpenseDailyRepository;
 import com.anksit.expensetracker.service.expense.daily.ExpenseDailyService;
 import com.anksit.expensetracker.service.mapper.ExpenseDailyMapper;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static java.lang.Math.ceil;
 
 @Service
 public class ExpenseDailyServiceImpl implements ExpenseDailyService {
@@ -45,6 +48,21 @@ public class ExpenseDailyServiceImpl implements ExpenseDailyService {
     public void deleteDailyExpense(Long id) {
 
         expenseDailyRepository.deleteById(id);
+
+    }
+
+    @Override
+    public List<ExpenseDailyDTO> fetchAllDailyExpensesByPagination(Integer pagination) {
+
+        Double maxPageNumber = ceil(mapper.mapToExpenseDailyDtoList(expenseDailyRepository.findAll()).stream().count() / 10.0);
+
+        return (pagination < maxPageNumber) ? fetchAllDailyExpensesByCriteria(pagination) : fetchAllDailyExpensesByCriteria((int) (maxPageNumber - 1));
+
+    }
+
+    private List<ExpenseDailyDTO> fetchAllDailyExpensesByCriteria(Integer pagination){
+
+        return mapper.mapToExpenseDailyDtoList(expenseDailyRepository.fetchAllDailyExpensesByPagination(PageRequest.of(pagination, 10)));
 
     }
 
