@@ -8,7 +8,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-06-02T14:18:41-0400",
+    date = "2022-06-06T13:02:40-0400",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 18 (Oracle Corporation)"
 )
 public class ExpenseDailyMapperImpl extends ExpenseDailyMapper {

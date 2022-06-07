@@ -26,7 +26,7 @@ class ExpenseDailyServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         expenseDailyService = new ExpenseDailyServiceImpl(expenseDailyRepository);
     }
 

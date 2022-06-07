@@ -15,6 +15,6 @@ public interface ExpenseDailyService {
 
     void deleteDailyExpense(Long id);
 
-    List<ExpenseDailyDTO> fetchAllDailyExpensesByPagination(Integer pagination);
+    List<ExpenseDailyDTO> fetchAllDailyExpensesByPagination(int pagination);
 
 }
