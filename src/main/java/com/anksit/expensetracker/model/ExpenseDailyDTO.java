@@ -17,5 +17,6 @@ public class ExpenseDailyDTO {
     private String expenseNote;
     private String expenseCategory;
     private Long userId;
+    private Long pageNumber;
 
 }

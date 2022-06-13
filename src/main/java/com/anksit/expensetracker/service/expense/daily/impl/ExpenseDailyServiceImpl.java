@@ -9,9 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static java.lang.Math.ceil;
-import static java.lang.Math.max;
-
 @Service
 public class ExpenseDailyServiceImpl implements ExpenseDailyService {
 
@@ -55,14 +52,10 @@ public class ExpenseDailyServiceImpl implements ExpenseDailyService {
     @Override
     public List<ExpenseDailyDTO> fetchAllDailyExpensesByPagination(int pagination) {
 
-        Double maxPageNumber = ceil(mapper.mapToExpenseDailyDtoList(expenseDailyRepository.findAll()).stream().count() / 10.0);
-        return (pagination < maxPageNumber )  ? fetchAllDailyExpensesByCriteria(pagination) : fetchAllDailyExpensesByCriteria((int) (maxPageNumber - 1));
+        List<ExpenseDailyDTO> expenseDailyDTOList = mapper.mapToExpenseDailyDtoList(expenseDailyRepository.fetchAllDailyExpensesByPagination(PageRequest.of(pagination, 10)));
+        expenseDailyDTOList.stream().findFirst().get().setPageNumber((long) Math.ceil(fetchAllDailyExpenses().stream().count() / 10F));
 
-    }
-
-    private List<ExpenseDailyDTO> fetchAllDailyExpensesByCriteria(int pagination){
-
-        return mapper.mapToExpenseDailyDtoList(expenseDailyRepository.fetchAllDailyExpensesByPagination(PageRequest.of(pagination, 10)));
+        return expenseDailyDTOList;
 
     }
 
